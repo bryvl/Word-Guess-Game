@@ -1,12 +1,14 @@
 var wordToGuess; 
 var letterGuessedInstances;
+var guessesRemaining = 5;
 //Array of words to guess from
 var gameWords = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 //Hidden wordToGuess should be array of ' _ ' as long as letters in word
 var hiddenWord = [];
 
 //This is the initial key listen to create the button that generates the word
-
+//If the userguess is found in the word, then the corresponding ' _ ' will be replaced with that letter
+//If the userguess is not found in the word then the letter will be written on the side of the page
 $(document).keypress(function(event) {
         var genBtn = $('#genWord');
         if(genBtn.length === 0) {
@@ -27,18 +29,30 @@ $(document).keypress(function(event) {
                     hiddenWord[i] = userGuess;
                     console.log(hiddenWord);
                     $('#guessDiv').html(hiddenWord);
+                } 
+                
+            }
+            if(!wordToGuess.includes(userGuess)) {
+                $('#lettersGuessed').append(userGuess);
+                guessesRemaining--;
+                if(guessesRemaining === 0) {
+                    $('#guessesRemaining').html('Womp womp :( Could not find ' + userGuess + '. ' + 'No remaining guesses, try another word!');
+                    genWord();
+                } else {
+                    $('#guessesRemaining').html('Could not find ' + userGuess + '. ' + guessesRemaining + ' guesses remaining.');
                 }
             }
-            confirmComplete();
         console.log('Found the letter ' + userGuess + ' in the word ' + letterGuessedInstances + ' times!');
+        confirmComplete();
         }
 
         
 })
 //This function begins a round by generating a word and listening for user guesses
-//If the userguess is found in the word, then the corresponding ' _ ' will be replaced with that letter
-//If the userguess is not found in the word then the letter will be written on the side of the page
 function genWord(){
+    $('#guessDiv').html(' ');
+    $('#lettersGuessed').html(' ');
+    hiddenWord = [];
     //Generate a random number based on the number of items in our gameWords[] list
     var randNum = Math.floor((Math.random() * gameWords.length));
 
@@ -64,6 +78,8 @@ function confirmComplete() {
     
     if(hiddenWord.every(checkLetters) === true) {
         console.log('Word complete!');
+        var victoryMsg = ('<div>' + 'Congratulations! You guessed the word!' + '</div>');
+        $("#guessDiv").append(victoryMsg);
     }
 }
     
