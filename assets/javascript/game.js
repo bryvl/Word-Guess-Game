@@ -2,7 +2,10 @@ var wordToGuess;
 var letterGuessedInstances;
 var guessesRemaining = 5;
 //Array of words to guess from
-var gameWords = ['interstellar', 'andromeda', 'cosmos', 'milky way', 'supernova', 'redshift', 'pulsar', 'nebula', ' lightspeed', ];
+var gameWords = ['interstellar', 'andromeda', 'cosmos']; // 'milky way', 'supernova', 'redshift', 'pulsar', 'nebula', ' lightspeed' 
+
+// var wordIndex = gameWords.indexOf(wordToGuess); <--- this line was messing up line 12 for some unknown reason
+
 //Hidden wordToGuess should be array of ' _ ' as long as letters in word
 var hiddenWord = [];
 
@@ -39,22 +42,21 @@ $(document).keypress(function(event) {
                     $('#guessesRemaining').html('Womp womp :( Could not find ' + userGuess + '. ' + 'No remaining guesses, try another word!');
                     genWord();
                 } else {
-                    $('#guessesRemaining').html('Could not find ' + userGuess + '. ' + guessesRemaining + ' guesses remaining.');
+                    $('#guessesRemaining').html('Guesses Remaining: ' + guessesRemaining);
                 }
             }
-        console.log('Found the letter ' + userGuess + ' in the word ' + letterGuessedInstances + ' times!');
-        confirmComplete();
+            console.log('Found the letter ' + userGuess + ' in the word ' + letterGuessedInstances + ' times!');
+            confirmComplete();
         }
-
-        
 })
+
 //This function begins a round by generating a word and listening for user guesses
 function genWord(){
 
     //The following lines should probably be put in a separate reset() function
     $('#guessDiv').html(' ');
-    $('#lettersGuessed').html(' ');
-    $('#guessesRemaining').html(' ');
+    $('#lettersGuessed').html('Letters Guessed Incorrectly:  ');
+    $('#guessesRemaining').html('Guesses Remaining: ');
     guessesRemaining = 5;
     hiddenWord = [];
     //
@@ -81,7 +83,7 @@ function genWord(){
     //runs if there is a space in wordToGuess
     if(hasSpace(wordToGuess) === true) {
         console.log(spacePlace);
-        hiddenWord[spacePlace] = ' ' + ' ' + ' ';
+        hiddenWord[spacePlace] = ' ';
         console.log(hiddenWord);
         $('#guessDiv').html(hiddenWord );
     }
@@ -104,6 +106,12 @@ function confirmComplete() {
         console.log('Word complete!');
         var victoryMsg = ('<div>' + 'Congratulations! You guessed the word!' + '</div>');
         $("#guessDiv").append(victoryMsg);
+        console.log("Array before splice: " + gameWords);
+        console.log("Removed: " + gameWords.splice(gameWords.indexOf(wordToGuess), 1));
+        console.log("Array after splice: " + gameWords);
+        if(gameWords.length === 0) {
+            console.log("You've guessed all the words!");
+        }
         genWord();
     }
 }
