@@ -2,7 +2,7 @@ var wordToGuess;
 var letterGuessedInstances;
 var guessesRemaining = 5;
 //Array of words to guess from
-var gameWords = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+var gameWords = ['interstellar', 'andromeda', 'cosmos', 'milky way', 'supernova', 'redshift', 'pulsar', 'nebula', ' lightspeed', ];
 //Hidden wordToGuess should be array of ' _ ' as long as letters in word
 var hiddenWord = [];
 
@@ -50,9 +50,15 @@ $(document).keypress(function(event) {
 })
 //This function begins a round by generating a word and listening for user guesses
 function genWord(){
+
+    //The following lines should probably be put in a separate reset() function
     $('#guessDiv').html(' ');
     $('#lettersGuessed').html(' ');
+    $('#guessesRemaining').html(' ');
+    guessesRemaining = 5;
     hiddenWord = [];
+    //
+
     //Generate a random number based on the number of items in our gameWords[] list
     var randNum = Math.floor((Math.random() * gameWords.length));
 
@@ -67,7 +73,25 @@ function genWord(){
         hiddenWord.push(' _ ');
         $('#guessDiv').append(hiddenWord[i]);
 
-    } 
+    }
+    
+    //Searches for the index of a space character in wordToGuess
+    var spacePlace = wordToGuess.indexOf(' ');
+    
+    //runs if there is a space in wordToGuess
+    if(hasSpace(wordToGuess) === true) {
+        console.log(spacePlace);
+        hiddenWord[spacePlace] = ' ' + ' ' + ' ';
+        console.log(hiddenWord);
+        $('#guessDiv').html(hiddenWord );
+    }
+    
+}
+
+
+//check for spaces in word to guess
+function hasSpace(string) {
+    return string.includes(' ');
 }
 
 //checkLetters() and confirmComplete() work in tandem to sift through every char in hiddenWord and determine when the array matches wordToGuess
@@ -80,6 +104,7 @@ function confirmComplete() {
         console.log('Word complete!');
         var victoryMsg = ('<div>' + 'Congratulations! You guessed the word!' + '</div>');
         $("#guessDiv").append(victoryMsg);
+        genWord();
     }
 }
     
