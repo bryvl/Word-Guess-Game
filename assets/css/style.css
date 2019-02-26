@@ -4,8 +4,30 @@ body {
     background-size: 100%;
     width: 100%;
     color: #6DDDB8;
+    padding: 0;
+    margin: 0;
 }
 
+/* Top of Page */
+header {
+    width: 100%;
+    height: 100px;
+    background-color: rgba(116, 38, 55, 0.452);
+    text-align: center;
+    border-bottom: 2px solid white; 
+    /* #99515D */
+    padding: 10px;
+}
+header h1{
+    color: #A5FCEB;
+    font-size: 3em;
+    font-family: 'Orbitron', sans-serif;
+}
+
+h1 {
+    
+    color: #6DDDB8;
+}
 
 button {
     width: 250px;
@@ -24,11 +46,23 @@ button:hover {
     border: 2px solid #AA607D;
 }
 
+
+/* Bottom */
+#extra-space {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 75px;
+    background-color: #975467;
+    border-top: 2px solid white;
+}
+/* Classes */
 .lighterText {
     color: #A5FCEB;
 }
 .lightText {
-    color: white;
+    color: rgb(238, 227, 227);
 }
 
 .biggerText {
