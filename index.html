@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Space Word Guess</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -11,18 +11,25 @@
 <body>
     <!-- Could be cool to make it like an arcade game -->
     <div class="col" id="wordGen">
-        <h1>Word Guess</h1>
-        <div id="buttonDiv"><p>Press Any Key to Begin!</p></div>
-
+        <h1>Guardians of the Guess-exy</h1>
     </div>
     <div class="col" id="mainGameView">
-        <div id='guessDiv'></div>
+        <div id='guessDiv' class="lightText"></div>
     </div>
     <div class="col" id="gameInfo">
-        <h2>Game Info</h2>
-        <div id="lettersGuessed">Letters Guessed Incorrectly: </div>    
-        <div id="guessesRemaining"> Guesses Remaining: </div>
+        <h1>Game Info</h1>
+        <div id="directions" class="lightText">
+            <ul>
+                <li>Press any key to begin.</li>
+                <li>Press the button to generate your first word (you'll only have to press the button once).</li>
+                <li>Press a key on the keyboard to guess a letter in the word to guess.</li>
+                <li>Don't guess incorrectly more than 5 times or you lose!</li>
+            </ul>
+        </div>
+        <div id="lettersGuessed" class="biggerText lighterText">Letters Guessed Incorrectly: </div>
+        <div id="guessesRemaining" class="biggerText lighterText"> Guesses Remaining: </div>
     </div>
+    <div id="buttonDiv" class="lightText biggerText"><p>Press Any Key to Begin!</p></div>
 
     <script src="assets/javascript/game.js"></script>
 </body>

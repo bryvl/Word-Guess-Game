@@ -2,7 +2,7 @@ var wordToGuess;
 var letterGuessedInstances;
 var guessesRemaining = 5;
 //Array of words to guess from
-var gameWords = ['interstellar', 'andromeda', 'cosmos']; // 'milky way', 'supernova', 'redshift', 'pulsar', 'nebula', ' lightspeed' 
+var gameWords = ['interstellar', 'andromeda', 'cosmos', 'supernova', 'redshift', 'pulsar', 'nebula', 'lightspeed', 'quasar', 'spaghettification', 'qubit', 'parsec']; //'milky way' Figure out the whole space in a string thing later
 
 // var wordIndex = gameWords.indexOf(wordToGuess); <--- this line was messing up line 12 for some unknown reason
 
@@ -15,7 +15,7 @@ var hiddenWord = [];
 $(document).keypress(function(event) {
         var genBtn = $('#genWord');
         if(genBtn.length === 0) {
-            $('#buttonDiv').html("<button id='genWord'>" + "Generate a word to guess!" + "</button>");
+            $('#buttonDiv').html("<button id='genWord'>" + "Start Guessing" + "</button>");
             $('#genWord').on('click', genWord);
         } else {
             if(!wordToGuess) {
@@ -36,13 +36,13 @@ $(document).keypress(function(event) {
                 
             }
             if(!wordToGuess.includes(userGuess)) {
-                $('#lettersGuessed').append(userGuess);
+                $('#lettersGuessed').append('<span class="lightText">' + userGuess + '</span>');
                 guessesRemaining--;
                 if(guessesRemaining === 0) {
                     $('#guessesRemaining').html('Womp womp :( Could not find ' + userGuess + '. ' + 'No remaining guesses, try another word!');
                     genWord();
                 } else {
-                    $('#guessesRemaining').html('Guesses Remaining: ' + guessesRemaining);
+                    $('#guessesRemaining').html('Guesses Remaining: ' + '<span class="lightText">' + guessesRemaining + '</span>');
                 }
             }
             console.log('Found the letter ' + userGuess + ' in the word ' + letterGuessedInstances + ' times!');
@@ -52,7 +52,7 @@ $(document).keypress(function(event) {
 
 //This function begins a round by generating a word and listening for user guesses
 function genWord(){
-
+    $('#directions').remove();
     //The following lines should probably be put in a separate reset() function
     $('#guessDiv').html(' ');
     $('#lettersGuessed').html('Letters Guessed Incorrectly:  ');
