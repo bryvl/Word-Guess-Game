@@ -6,6 +6,7 @@ body {
     color: #6DDDB8;
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 /* Top of Page */
@@ -45,7 +46,14 @@ button:hover {
     color: #F0B4D9;
     border: 2px solid #AA607D;
 }
-
+/* Game Content */
+#guessDiv {
+    width: 100%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2.5em;
+    margin: 50px 0;
+}
 
 /* Bottom */
 #extra-space {
@@ -53,7 +61,7 @@ button:hover {
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 75px;
+    height: 100px;
     background-color: #975467;
     border-top: 2px solid white;
 }
